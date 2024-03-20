@@ -1,5 +1,6 @@
 ﻿using Employee_api.Models;
 using Employee_api.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -17,6 +18,7 @@ namespace Employee_api.Controllers
             _customerService = customerServices;
         }
         // GET: api/Category
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> Get()
         {
@@ -38,18 +40,18 @@ namespace Employee_api.Controllers
 
         // POST api/CategoryController
         [HttpPost]
-        public async Task<IActionResult> Post(User user)
+        public async Task<IActionResult> Post(Customer user)
         {
-            user.employeeName = null;
+            user.emp_Name = null;
             await _customerService.Create(user);
             return Ok("created successfully");
         }
 
         // PUT api/CategoryController/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(string id, [FromBody] User user)
+        public async Task<IActionResult> Put(string id, [FromBody] Customer user)
         {
-            user.employeeName = null;
+            user.emp_Name = null;
             var customer = await _customerService.Get(id);
             if (customer == null)
                 return NotFound();
