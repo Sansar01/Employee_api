@@ -4,13 +4,13 @@ namespace Employee_api.Services
 {
     public interface ICustomerServices
     {
-        Task<IEnumerable<User>> Get();
+        Task<IEnumerable<Customer>> Get();
 
-        Task<User> Get(string id);
+        Task<Customer> Get(string id);
 
-        Task Create(User user);
+        Task Create(Customer customer);
 
-        Task Update(string id, User user);
+        Task Update(string id, Customer customer);
 
         Task Delete(string id);
     }

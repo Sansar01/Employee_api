@@ -18,7 +18,7 @@ namespace Employee_api.Controllers
             _customerService = customerServices;
         }
         // GET: api/Category
-        [Authorize]
+        //[Authorize]
         [HttpGet]
         public async Task<IActionResult> Get()
         {
@@ -40,22 +40,22 @@ namespace Employee_api.Controllers
 
         // POST api/CategoryController
         [HttpPost]
-        public async Task<IActionResult> Post(Customer user)
+        public async Task<IActionResult> Post(Customer customer)
         {
-            user.emp_Name = null;
-            await _customerService.Create(user);
+            customer.emp_Name = null;
+            await _customerService.Create(customer);
             return Ok("created successfully");
         }
 
         // PUT api/CategoryController/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(string id, [FromBody] Customer user)
+        public async Task<IActionResult> Put(string id, [FromBody] Customer customer)
         {
-            user.emp_Name = null;
-            var customer = await _customerService.Get(id);
-            if (customer == null)
+            customer.emp_Name = null;
+            var customers = await _customerService.Get(id);
+            if (customers == null)
                 return NotFound();
-            await _customerService.Update(id, user);
+            await _customerService.Update(id, customer);
             return Ok("updated successfully");
         }
 
